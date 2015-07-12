@@ -1,0 +1,29 @@
+{
+  "name": "Backjack-server",
+  "version": "1.0.0",
+  "description": "Backjack game server",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kadoshms/Backjack.git"
+  },
+  "keywords": [
+    "socket.io",
+    "nodejs",
+    "game",
+    "server"
+  ],
+  "author": "kadoshms",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kadoshms/Backjack/issues"
+  },
+  "homepage": "https://github.com/kadoshms/Backjack",
+  "dependencies": {
+    "express": "^4.13.1"
+  }
+}
