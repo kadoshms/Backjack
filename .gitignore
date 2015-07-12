@@ -2,4 +2,4 @@
 .settings
 server/node_modules/
 server/npm-debug.log
-
+client/js/vendor
