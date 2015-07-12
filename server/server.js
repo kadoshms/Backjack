@@ -9,6 +9,8 @@ var Room			=	require('./modules/room');
 // Create the roomm
 var room = new Room("Las Vegas");
 
+var networking = new Netwokring(io);
+
 // Handle basic connection
 io.on("connection", function(socket){
 
@@ -22,6 +24,8 @@ io.on("connection", function(socket){
 		var player = new Player(socket.id, room.nextIndex());
 
 		room.playerJoin(player, socket);
+
+		networking.toRoom(room, "playerJoined", { room : room });
 	});
 });
 
