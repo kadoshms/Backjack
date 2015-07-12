@@ -4,6 +4,8 @@
 *	Author		: kadoshms
 */
 
+var winston 		= 	require('winston');
+
 /**
  * Construct a new room
  * @param name room name
@@ -21,9 +23,17 @@ Room.prototype.STATUS_TURNS 	= 1030;
 /**
  * Add player to room
  * @param {player} player to add
+ * @param {socket} current socket
  */
-Room.prototype.playerJoin = function(player){
+Room.prototype.playerJoin = function(player, socket){
 	this.players.push(player);
+
+	if(socket != undefined)
+	{
+		socket.join(this.name);
+	}
+
+	winston.log('info', 'player ' +player.id+ " joined room "+this.name);
 }
 
 /**
