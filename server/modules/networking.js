@@ -3,8 +3,14 @@
 *	Description	: this module holds all messaging/netwokring methods
 *	Author		: kadoshms
 */
-function Networking()
+
+/**
+ * Construct a new networking manager
+ * @param {socket.io} io object
+ */
+function Networking(io)
 {
+	this.io = io;
 }
 
 /**
@@ -14,7 +20,7 @@ function Networking()
  * @param msg message to emit
  */
 Networking.prototype.toRoom = function(room, evt, msg){
-	io.to(room.name).emit(evt, msg);
+	this.io.to(room.name).emit(evt, msg);
 }
 
 module.exports = Networking;
