@@ -1,5 +1,6 @@
 var assert 	= require('assert');
 var Deck	= require('../modules/deck');
+var Player	= require('../modules/player');
 
 describe('deck', function(){
 	it('shuffle a deck', function(){
@@ -18,5 +19,13 @@ describe('deck', function(){
 			}
 			assert.equal(4, counter);
 		}
+	});
+});
+
+describe('Player', function(){
+	var player = new Player();
+	it('set player credit', function(){
+		player.setCredit(500);
+		assert.equal(player.getCredit(), 500);
 	});
 });
