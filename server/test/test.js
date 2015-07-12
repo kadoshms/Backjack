@@ -49,4 +49,7 @@ describe('Room', function(){
 	it('get server name', function(){
 		assert.equal(room.getName(), "Test Room");
 	});
+	it('find player', function(){
+		assert.notEqual(room.getPlayer(1), null);
+	});
 });
