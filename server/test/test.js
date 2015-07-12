@@ -8,10 +8,9 @@ describe('server', function(){
 });
 
 describe('deck', function(){
+	var deck = new Deck();
+	deck.shuffle();
 	it('shuffle a deck', function(){
-		var deck = new Deck();
-		deck.shuffle();
-		
 		for(var i = 0 ; i < 52; i++)
 		{
 			var counter = 0;
@@ -24,6 +23,13 @@ describe('deck', function(){
 			}
 			assert.equal(4, counter);
 		}
+	});
+	it('draw cards', function(){
+		for(var i = 0 ; i < 208; i++)
+		{
+			assert.notEqual(deck.draw(), undefined);
+		}
+		assert.equal(deck.draw(), undefined);
 	});
 });
 

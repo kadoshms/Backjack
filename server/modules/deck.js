@@ -63,4 +63,14 @@ Deck.prototype.get = function(i){
 	return this.cards[i];
 }
 
+/**
+ * Draw a card
+ *
+ * @returns {card} drewed card
+ */
+Deck.prototype.draw = function(){
+	var card = this.cards.pop();
+	return card;
+}
+
 module.exports = Deck;
