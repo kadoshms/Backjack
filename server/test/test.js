@@ -3,6 +3,10 @@ var Deck	= require('../modules/deck');
 var Player	= require('../modules/player');
 var Room	= require('../modules/room');
 
+describe('server', function(){
+
+});
+
 describe('deck', function(){
 	it('shuffle a deck', function(){
 		var deck = new Deck();
@@ -34,8 +38,15 @@ describe('Player', function(){
 describe('Room', function(){
 	var room = new Room('Test Room');
 	var player = new Player(1, 0);
+
 	it('add player to room', function(){
 		room.playerJoin(player);
 		assert.notEqual(-1, room.getPlayers().indexOf(player))
+	});
+	it('next index should be 1', function(){
+		assert.equal(1, room.nextIndex());
+	});
+	it('get server name', function(){
+		assert.equal(room.getName(), "Test Room");
 	});
 });

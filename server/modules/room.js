@@ -34,4 +34,20 @@ Room.prototype.getPlayers = function(){
 	return this.players;
 }
 
+/**
+ * Get next index of player
+ * @returns {number} index 
+ */
+Room.prototype.nextIndex = function(){
+	return this.players.length;
+}
+
+/**
+ * Get room name
+ * @returns room name
+ */
+Room.prototype.getName = function(){
+	return this.name;
+}
+
 module.exports = Room;
