@@ -17,3 +17,21 @@ function Room(name){
 Room.prototype.STATUS_BET 		= 1010;
 Room.prototype.STATUS_HANDS 	= 1020;
 Room.prototype.STATUS_TURNS 	= 1030;
+
+/**
+ * Add player to room
+ * @param {player} player to add
+ */
+Room.prototype.playerJoin = function(player){
+	this.players.push(player);
+}
+
+/**
+ * Get room players
+ * @returns {Array} array of players
+ */
+Room.prototype.getPlayers = function(){
+	return this.players;
+}
+
+module.exports = Room;

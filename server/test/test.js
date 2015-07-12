@@ -1,6 +1,7 @@
 var assert 	= require('assert');
 var Deck	= require('../modules/deck');
 var Player	= require('../modules/player');
+var Room	= require('../modules/room');
 
 describe('deck', function(){
 	it('shuffle a deck', function(){
@@ -23,9 +24,18 @@ describe('deck', function(){
 });
 
 describe('Player', function(){
-	var player = new Player();
+	var player = new Player(1, 0);
 	it('set player credit', function(){
 		player.setCredit(500);
 		assert.equal(player.getCredit(), 500);
+	});
+});
+
+describe('Room', function(){
+	var room = new Room('Test Room');
+	var player = new Player(1, 0);
+	it('add player to room', function(){
+		room.playerJoin(player);
+		assert.notEqual(-1, room.getPlayers().indexOf(player))
 	});
 });
