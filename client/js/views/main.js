@@ -14,8 +14,16 @@ function($, Backbone){
 	
 	exports.MainView = Backbone.View.extend({
 		el		:	'#main-content',
-		
-		// render the view
+		/**
+		 * Sets up graphics for new player
+		 */
+		initRoom:	function(data){
+			var players = data.room.players;
+		},
+		/**
+		 * Render the view
+		 * @return {Backbone.View} current view
+		 */
 		render	:	function(){
 			this.$el.html("renderd");
 			return this;
