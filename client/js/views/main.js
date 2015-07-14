@@ -6,19 +6,32 @@
 
 define([
         'jquery',
-        'backbone'
+        'backbone',
+        'socket.io'
 ],
-function($, Backbone){
+function($, Backbone, io){
 
 	var exports = {};
 	
 	exports.MainView = Backbone.View.extend({
 		el		:	'#main-content',
+		events	: 	{
+			'click' : function(){
+				io.socket.emit("playerAction", "hit");
+			}
+		},
 		/**
 		 * Sets up graphics for new player
 		 */
 		initRoom:	function(data){
 			var players = data.room.players;
+		},
+		// handle player actions
+		/**
+		 * Handle player hit
+		 * @param {object} data retrived from server
+		 */
+		hit:	function(data){
 		},
 		/**
 		 * Render the view
