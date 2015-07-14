@@ -34,16 +34,17 @@ io.on("connection", function(socket){
 	/**
 	 * Handle user action
 	 */
-	socket.on("playerAction", function(action){
+	socket.on("playerAction", function(data){
 		var player = room.getPlayer(socket.id);
 		var params = {
 			room	:	room,
-			player	:	player
+			player	:	player,
+			data	:	data.args
 		};
 
-		var result = game[action].call(Room, params);
+		var result = game[data.action].call(Room, params);
 
-		networking.toRoom(room, "playerActionResult", { action : action,  player : player , result : result });
+		networking.toRoom(room, "playerActionResult", { action : data.action,  player : player , result : result });
 	});
 });
 

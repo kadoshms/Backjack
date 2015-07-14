@@ -20,7 +20,7 @@ function Game(io, map)
 
 /**
  * Hit player
- * @param {pobject} params parameters
+ * @param {object} params parameters
  */
 Game.prototype.hit = function(params){
 	var card = params.room.getDeck().draw();
@@ -31,4 +31,16 @@ Game.prototype.hit = function(params){
 	return card;
 }
 
+/**
+ * Player bet
+ * @param {object} params parameters
+ */
+Game.prototype.bet = function(params){
+	var result = params.player.setBet(params.data.bet);
+
+	if ( result ) winston.log('info','player '+params.player.id+' placed bet of '+params.data.bet);
+	else winston.log('info','server rejected '+params.player.id+' bet');
+
+	return result;
+}
 module.exports = Game;

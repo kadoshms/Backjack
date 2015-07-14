@@ -77,6 +77,10 @@ describe('Backjack', function(){
 			player.setCredit(500);
 			assert.equal(player.getCredit(), 500);
 		});
+		it('place bets', function(){
+			assert.equal(player.setBet(500), true);
+			assert.equal(player.setBet(600), false);
+		});
 	});
 
 	describe('Room', function(){

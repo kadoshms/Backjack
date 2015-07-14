@@ -14,6 +14,7 @@ function Player(id, index){
 	this.index 	= index;
 	this.hand 	= [];
 	this.credit = 1000;
+	this.bet	= 0;
 }
 
 /**
@@ -56,6 +57,24 @@ Player.prototype.handCards = function(cards){
  */
 Player.prototype.getHand = function(){
 	return this.hand;
+}
+
+/**
+ * Set bet
+ * @param {Number} set player bet
+ */
+Player.prototype.setBet = function(bet){
+	var result = this.credit - bet;
+
+	if( result >= 0 )
+	{
+		this.credit = this.credit - bet;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 module.exports = Player;
