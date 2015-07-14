@@ -25,6 +25,9 @@ function Game(io, map)
 Game.prototype.hit = function(params){
 	var card = params.room.getDeck().draw();
 	winston.log('info', 'player '+params.player.id+' drawed card '+ card + " and value " + game.map[card].value);
+
+	params.player.handCards(card);
+
 	return card;
 }
 

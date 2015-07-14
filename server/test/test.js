@@ -93,5 +93,10 @@ describe('Backjack', function(){
 		it('find player', function(){
 			assert.notEqual(room.getPlayer(1), null);
 		});
+		it('hand card', function(){
+			player.handCards([1, 4]);
+			assert.notEqual(player.getHand().indexOf(4), -1);
+			assert.equal(player.getHand().length, 2);
+		});
 	});
 });

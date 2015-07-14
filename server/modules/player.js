@@ -32,4 +32,30 @@ Player.prototype.getCredit = function(){
 	return this.credit;
 }
 
+/**
+ * Hand card to player
+ * @param {Array} cards array of cards
+ */
+Player.prototype.handCards = function(cards){
+	if(typeof(cards) != "number")
+	{
+		for(var i = 0 ; i < cards.length; i++)
+		{
+			this.hand.push(cards[i]);
+		}
+	}
+	else
+	{
+		this.hand.push(cards);
+	}
+}
+
+/**
+ * Get player hand
+ * @returns {array} player's hand
+ */
+Player.prototype.getHand = function(){
+	return this.hand;
+}
+
 module.exports = Player;
