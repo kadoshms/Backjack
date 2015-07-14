@@ -2,12 +2,35 @@ var assert 	= require('assert');
 var Deck	= require('../modules/deck');
 var Player	= require('../modules/player');
 var Room	= require('../modules/room');
+var helpers	= require('../modules/helpers');
 
 describe('Backjack', function(){
 
 	var room 	= new Room('Test Room');
 	var player 	= new Player(1, 0);
 
+	describe('helpers', function(){
+		it('generate a card map', function(){
+			var map = helpers.generateCardMap();
+
+			assert.equal(Object.keys(map).length, 52);
+
+			for(var i = 0 ; i < 52 ; i++)
+			{
+				var card = map[i];
+				var name = card.name;
+
+				if(name.indexOf('ace') != -1)
+				{
+					assert.equal(card.value, -1);
+				}
+				else if( (name.indexOf('jack') != -1) || (name.indexOf('queen') != -1) || (name.indexOf('king') != -1) )
+				{
+					assert.equal(card.value, 10);
+				}
+			}
+		});
+	});
 	describe('game', function(){
 		var deck 	= new Deck();
 		deck.shuffle();
