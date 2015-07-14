@@ -8,15 +8,18 @@
  * Construct a new game manager
  * @param {socket.io} io object
  */
-function Game()
+function Game(io)
 {
+	this.io = io;
 }
 
 /**
  * Hit player
+ * @param {pobject} params parameters
  */
-Game.prototype.hit = function(player){
-
+Game.prototype.hit = function(params){
+	var card = params.room.getDeck().draw();
+	return card;
 }
 
 module.exports = Game;

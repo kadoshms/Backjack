@@ -5,6 +5,7 @@
 */
 
 var winston 		= 	require('winston');
+var Deck			=	require('./deck');
 
 /**
  * Construct a new room
@@ -13,6 +14,9 @@ var winston 		= 	require('winston');
 function Room(name){
 	this.name	 =	name;
 	this.players =	[];
+	this.deck	 =  new Deck();
+
+	this.deck.shuffle();
 }
 
 // Room statuses
@@ -75,4 +79,10 @@ Room.prototype.getPlayer = function(id){
 	return null;
 }
 
+/**
+ * Get room deck
+ */
+Room.prototype.getDeck = function(){
+	return this.deck;
+}
 module.exports = Room;
