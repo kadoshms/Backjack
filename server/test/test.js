@@ -73,6 +73,12 @@ describe('Backjack', function(){
 	});
 
 	describe('Player', function(){
+		it('player ready', function(){
+			assert.equal(player.playerReady(), true);
+
+			// After player is ready already...
+			assert.equal(player.playerReady(), false);
+		});
 		it('set player credit', function(){
 			player.setCredit(500);
 			assert.equal(player.getCredit(), 500);

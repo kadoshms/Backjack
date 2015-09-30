@@ -4,6 +4,11 @@
 *	Author		: kadoshms
 */
 
+var winston 		= 	require('winston');
+
+Player.prototype.STATUS_NOT_READY = 2000;
+Player.prototype.STATUS_READY = 2010;
+
 /**
  * Construct a new player
  * @param id player id
@@ -15,6 +20,7 @@ function Player(id, index){
 	this.hand 	= [];
 	this.credit = 1000;
 	this.bet	= 0;
+	this.status = this.STATUS_NOT_READY;
 }
 
 /**
@@ -75,6 +81,20 @@ Player.prototype.setBet = function(bet){
 	{
 		return false;
 	}
+}
+
+/**
+ * Player ready
+ */
+Player.prototype.playerReady = function(){
+
+	if ( this.status == this.STATUS_PLAYER_READY)
+		return false;
+
+	this.status = this.STATUS_PLAYER_READY;
+	winston.log('info', 'player ' +this.id+ " marked as ready");
+
+	return true;
 }
 
 module.exports = Player;
