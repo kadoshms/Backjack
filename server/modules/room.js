@@ -17,12 +17,23 @@ function Room(name){
 	this.deck	 =  new Deck();
 
 	this.deck.shuffle();
+	this.status	= this.STATUS_NO_ACTIVE;
+}
+
+/**
+ * Change status
+ * @param status new status
+ */
+Room.prototype.setStatus = function(status){
+	this.status = status;
 }
 
 // Room statuses
+Room.prototype.STATUS_NO_ACTIVE = 1000;
 Room.prototype.STATUS_BET 		= 1010;
 Room.prototype.STATUS_HANDS 	= 1020;
 Room.prototype.STATUS_TURNS 	= 1030;
+Room.prototype.STATUS_ACTIVE	= 1040;
 
 /**
  * Add player to room

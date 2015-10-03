@@ -94,6 +94,10 @@ describe('Backjack', function(){
 			room.playerJoin(player);
 			assert.notEqual(-1, room.getPlayers().indexOf(player))
 		});
+		it('change status', function(){
+			room.setStatus(room.STATUS_ACTIVE);
+			assert.equal(room.status, 1040);
+		});
 		it('next index should be 1', function(){
 			assert.equal(1, room.nextIndex());
 		});
