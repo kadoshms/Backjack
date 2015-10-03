@@ -42,6 +42,11 @@ io.on("connection", function(socket){
 			data	:	data.args
 		};
 
+		if ( game[data.action] == undefined){
+			winston.log('warn', 'unkown action '+data.action+', aborting');
+			return;
+		}
+
 		var result = game[data.action].call(Room, params);
 
 		networking.toRoom(room, "playerActionResult", { action : data.action,  player : player , result : result });
