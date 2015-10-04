@@ -88,10 +88,10 @@ Player.prototype.setBet = function(bet){
  */
 Player.prototype.playerReady = function(){
 
-	if ( this.status == this.STATUS_PLAYER_READY)
+	if ( this.status == this.STATUS_READY)
 		return false;
 
-	this.status = this.STATUS_PLAYER_READY;
+	this.status = this.STATUS_READY;
 	winston.log('info', 'player ' +this.id+ " marked as ready");
 
 	return true;
