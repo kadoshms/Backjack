@@ -16,7 +16,6 @@ function Room(name){
 	this.name	 =	name;
 	this.players =	[];
 	this.deck	 =  new Deck();
-
 	this.deck.shuffle();
 	this.status	= this.STATUS_NO_ACTIVE;
 	this.round	= 0;
@@ -121,5 +120,16 @@ Room.prototype.getNumOfReadyPlayers = function(){
 Room.prototype.startNewRound = function(){
 	this.setStatus(this.STATUS_BET);
 	this.round++;
+}
+
+/**
+ * Resets room properties (fresh start)
+ */
+Room.prototype.reset = function(){
+	this.round 	= 0;
+	this.status	= this.STATUS_NO_ACTIVE;
+	this.players =	[];
+	this.deck	 =  new Deck();
+	this.deck.shuffle();
 }
 module.exports = Room;

@@ -121,5 +121,11 @@ describe('Backjack', function(){
 			assert.notEqual(player.getHand().indexOf(4), -1);
 			assert.equal(player.getHand().length, 2);
 		});
+		it('reset room', function(){
+			room.reset();
+			assert.equal(room.round, 0);
+			assert.equal(room.players.length, 0);
+			assert.equal(room.status, 1000);
+		});
 	});
 });
