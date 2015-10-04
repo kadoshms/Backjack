@@ -6,6 +6,7 @@
 
 var winston 		= 	require('winston');
 var Deck			=	require('./deck');
+var Player			=	require('./player');
 
 /**
  * Construct a new room
@@ -95,5 +96,21 @@ Room.prototype.getPlayer = function(id){
  */
 Room.prototype.getDeck = function(){
 	return this.deck;
+}
+
+/**
+ * return number of ready players
+ * @return number of ready players
+ */
+Room.prototype.getNumOfReadyPlayers = function(){
+	var players = this.players;
+	var count = 0;
+
+	for(var i = 0 ; i < players.length; i++)
+	{
+		count = ( players[i].status == Player.prototype.STATUS_READY ) ? count+1 : count;
+	}
+
+	return count;
 }
 module.exports = Room;

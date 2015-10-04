@@ -101,6 +101,10 @@ describe('Backjack', function(){
 		it('next index should be 1', function(){
 			assert.equal(1, room.nextIndex());
 		});
+		it('get number of ready players', function(){
+			var num = room.getNumOfReadyPlayers();
+			assert.equal(num, 1);
+		});
 		it('get server name', function(){
 			assert.equal(room.getName(), "Test Room");
 		});
