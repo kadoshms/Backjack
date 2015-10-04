@@ -19,6 +19,7 @@ function Room(name){
 
 	this.deck.shuffle();
 	this.status	= this.STATUS_NO_ACTIVE;
+	this.round	= 0;
 }
 
 /**
@@ -112,5 +113,13 @@ Room.prototype.getNumOfReadyPlayers = function(){
 	}
 
 	return count;
+}
+
+/**
+ * Start a new round
+ */
+Room.prototype.startNewRound = function(){
+	this.setStatus(this.STATUS_BET);
+	this.round++;
 }
 module.exports = Room;
