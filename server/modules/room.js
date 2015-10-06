@@ -120,6 +120,7 @@ Room.prototype.getNumOfReadyPlayers = function(){
 Room.prototype.startNewRound = function(){
 	this.setStatus(this.STATUS_BET);
 	this.round++;
+	winston.log('info', 'new round started in room '+this.name);
 }
 
 /**
