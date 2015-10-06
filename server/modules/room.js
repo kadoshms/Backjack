@@ -12,16 +12,16 @@ var game			=	undefined;
 /**
  * Construct a new room
  * @param name room name
- * @param game current game manager
+ * @param _game current game manager
  */
-function Room(name, game){
+function Room(name, _game){
 	this.name	 =	name;
 	this.players =	[];
 	this.deck	 =  new Deck();
 	this.deck.shuffle();
 	this.status	= this.STATUS_NO_ACTIVE;
 	this.round	= 0;
-	game = game;
+	game = _game;
 }
 
 /**

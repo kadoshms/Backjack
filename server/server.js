@@ -10,7 +10,7 @@ var helpers			=	require('./modules/helpers');
 
 var networking 	= new Netwokring(io);
 var map			= helpers.generateCardMap();
-var game 	   	= new Game(io, map);
+var game 	   	= new Game(io, map, networking);
 
 //Create the roomm
 var room = new Room("Las Vegas", game);
