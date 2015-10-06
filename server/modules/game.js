@@ -5,6 +5,7 @@
 */
 
 var winston 		= 	require('winston');
+var Room			=	require('./room');
 
 /**
  * Construct a new game manager
@@ -42,5 +43,39 @@ Game.prototype.bet = function(params){
 	else winston.log('info','server rejected '+params.player.id+' bet');
 
 	return result;
+}
+
+/**
+ * Player mark as ready
+ * @param {object} param parameters
+ */
+Game.prototype.ready = function(params){
+	var room = params.room;
+	params.player.playerReady();
+
+	var readyPlayers = room.getNumOfReadyPlayers();
+
+	// check if there's at least one player ready
+	if ( room.status == Room.prototype.STATUS_NO_ACTIVE && readyPlayers >= 1)
+	{
+		game.startGame(params);
+	}
+}
+
+/**
+ * Start a new game
+ * @param {object} param parameters
+ */
+Game.prototype.startGame = function(params) {
+	var room = params.room;
+
+	if ( room.round == 0 )
+	{
+		room.startNewRound();
+	}
+	else
+	{
+		room.reset();
+	}
 }
 module.exports = Game;

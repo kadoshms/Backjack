@@ -28,7 +28,7 @@ io.on("connection", function(socket){
 
 		room.playerJoin(player, socket);
 
-		networking.toRoom(room, "playerJoined", { room : room });
+		networking.toRoom(room, "playerJoined", { room : room, player : player });
 	});
 
 	/**
