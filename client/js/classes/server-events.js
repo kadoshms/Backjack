@@ -31,6 +31,12 @@ define(['socket.io'], function(io){
 				main[data.action].call(main, data);
 			}
 		});
+		/**
+		 * Executed when a new round begins and bets should be placed
+		 */
+		io.socket.on("placeBet", function(data){
+			main.placeBet();
+		});
 	}
 
 	return { initialize : initialize };

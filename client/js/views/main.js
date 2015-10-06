@@ -45,6 +45,13 @@ function($, Backbone, io, Controls){
 			this.$el.find('#playerReady').remove();
 		},
 		/**
+		 * ask player to place bet
+		 */
+		placeBet: function(){
+			var bet = window.prompt("Enter your bet");
+			io.socket.emit("playerAction", { action : "bet" , args : { bet : bet } });
+		},
+		/**
 		 * Render the view
 		 * @return {Backbone.View} current view
 		 */
