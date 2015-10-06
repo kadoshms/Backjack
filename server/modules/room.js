@@ -28,6 +28,11 @@ function Room(name){
 Room.prototype.setStatus = function(status){
 	this.status = status;
 	winston.log('info', 'room '+this.name+' changed status to : '+status);
+
+	if ( Room.prototype.statusHandlers[status] != undefined)
+	{
+		Room.prototype.statusHandlers[status]();
+	}
 }
 
 // Room statuses
