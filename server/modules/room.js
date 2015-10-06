@@ -7,6 +7,7 @@
 var winston 		= 	require('winston');
 var Deck			=	require('./deck');
 var Player			=	require('./player');
+var game			=	undefined;
 
 /**
  * Construct a new room
@@ -31,9 +32,11 @@ Room.prototype.setStatus = function(status){
 	this.status = status;
 	winston.log('info', 'room '+this.name+' changed status to : '+status);
 
+	if (game == undefined) return;
+
 	if (game.roomStatusHandlers[status] != undefined)
 	{
-		game.roomStatusHandlers[status]();
+		game.roomStatusHandlers[status](this);
 	}
 }
 
