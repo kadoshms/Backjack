@@ -27,6 +27,7 @@ function Room(name){
  */
 Room.prototype.setStatus = function(status){
 	this.status = status;
+	winston.log('info', 'room '+this.name+' changed status to : '+status);
 }
 
 // Room statuses
@@ -118,10 +119,11 @@ Room.prototype.getNumOfReadyPlayers = function(){
  * Start a new round
  */
 Room.prototype.startNewRound = function(){
-	this.setStatus(this.STATUS_BET);
 	this.round++;
 	winston.log('info', 'new round started in room '+this.name);
+	this.setStatus(this.STATUS_BET);
 }
+
 
 /**
  * Resets room properties (fresh start)
