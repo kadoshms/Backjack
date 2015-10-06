@@ -8,12 +8,12 @@ var Room			=	require('./modules/room');
 var Game			=	require('./modules/game');
 var helpers			=	require('./modules/helpers');
 
-// Create the roomm
-var room = new Room("Las Vegas");
-
 var networking 	= new Netwokring(io);
 var map			= helpers.generateCardMap();
 var game 	   	= new Game(io, map);
+
+//Create the roomm
+var room = new Room("Las Vegas", game);
 
 // Handle basic connection
 io.on("connection", function(socket){

@@ -11,14 +11,16 @@ var Player			=	require('./player');
 /**
  * Construct a new room
  * @param name room name
+ * @param game current game manager
  */
-function Room(name){
+function Room(name, game){
 	this.name	 =	name;
 	this.players =	[];
 	this.deck	 =  new Deck();
 	this.deck.shuffle();
 	this.status	= this.STATUS_NO_ACTIVE;
 	this.round	= 0;
+	game = game;
 }
 
 /**
@@ -29,9 +31,9 @@ Room.prototype.setStatus = function(status){
 	this.status = status;
 	winston.log('info', 'room '+this.name+' changed status to : '+status);
 
-	if ( Room.prototype.statusHandlers[status] != undefined)
+	if (game.roomStatusHandlers[status] != undefined)
 	{
-		Room.prototype.statusHandlers[status]();
+		game.roomStatusHandlers[status]();
 	}
 }
 
