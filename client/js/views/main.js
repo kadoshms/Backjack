@@ -8,9 +8,10 @@ define([
         'jquery',
         'backbone',
         'socket.io',
-        'views/controls'
+        'views/controls',
+        'classes/consts'
 ],
-function($, Backbone, io, Controls){
+function($, Backbone, io, Controls, Consts){
 
 	var exports = {};
 	
