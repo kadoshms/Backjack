@@ -33,14 +33,14 @@ function($, Backbone, io, Controls){
 		 * Handle player hit
 		 * @param {object} data retrived from server
 		 */
-		hit:	function(data){
+		hitResult:	function(data){
 			this.$el.append(data.result);
 		},
 		/**
 		 * Handle player ready (after server is done handling request)
 		 * @param {object} data retrived from server
 		 */
-		ready: function(data){
+		readyResult: function(data){
 			// the ready button is useles after it has been used
 			this.$el.find('#playerReady').remove();
 		},

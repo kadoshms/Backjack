@@ -26,9 +26,10 @@ define(['socket.io'], function(io){
 		 * @param data
 		 */
 		io.socket.on("playerActionResult", function(data){
-			if(main[data.action] != undefined)
+			var method = data.action + "Result";
+			if(main[method] != undefined)
 			{
-				main[data.action].call(main, data);
+				main[method].call(main, data);
 			}
 		});
 		/**
