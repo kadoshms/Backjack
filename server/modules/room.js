@@ -23,6 +23,7 @@ function Room(name, _game){
 	this.round	= 0;
 	this.betCount = 0;
 	this.dealer = new Player("dealer", -1);
+
 	game = _game;
 }
 
@@ -97,6 +98,22 @@ Room.prototype.getPlayer = function(id){
 	for(var i = 0 ; i < this.players.length; i++)
 	{
 		if(this.players[i].id == id)
+		{
+			return this.players[i];
+		}
+	}
+	return null;
+}
+
+/**
+ * Get player by index
+ * @param index index player index
+ * @return {Player} player with specified index
+ */
+Room.prototype.getPlayerByIndex = function(index){
+	for(var i = 0 ; i < this.players.length; i++)
+	{
+		if(this.players[i].index == index)
 		{
 			return this.players[i];
 		}

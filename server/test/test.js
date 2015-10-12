@@ -116,6 +116,9 @@ describe('Backjack', function(){
 		it('find player', function(){
 			assert.notEqual(room.getPlayer(1), null);
 		});
+		it('find player by index', function(){
+			assert.notEqual(room.getPlayerByIndex(0), null);
+		});
 		it('start a new round', function(){
 			room.startNewRound();
 			assert.equal(room.round, 1);
