@@ -8,7 +8,7 @@ var Game	= require('../modules/game');
 describe('Backjack', function(){
 
 	var room 	= new Room('Test Room');
-	var player 	= new Player(1, 1);
+	var player 	= new Player(1, 0);
 	var game 	= new Game(undefined, undefined, undefined);
 
 	describe('helpers', function(){
@@ -104,7 +104,7 @@ describe('Backjack', function(){
 			assert.equal(room.status, 1040);
 		});
 		it('next index should be 1', function(){
-			assert.equal(2, room.nextIndex());
+			assert.equal(1, room.nextIndex());
 		});
 		it('get number of ready players', function(){
 			var num = room.getNumOfReadyPlayers();

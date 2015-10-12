@@ -22,7 +22,7 @@ function Room(name, _game){
 	this.status	= this.STATUS_NO_ACTIVE;
 	this.round	= 0;
 	this.betCount = 0;
-	this.dealer = new Player("dealer", 0);
+	this.dealer = new Player("dealer", -1);
 	game = _game;
 }
 
@@ -78,7 +78,7 @@ Room.prototype.getPlayers = function(){
  * @returns {number} index 
  */
 Room.prototype.nextIndex = function(){
-	return this.players.length + 1;
+	return this.players.length;
 }
 
 /**
