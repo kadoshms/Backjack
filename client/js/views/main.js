@@ -46,11 +46,28 @@ function($, Backbone, io, Controls, Consts){
 			this.$el.find('#playerReady').remove();
 		},
 		/**
+		 * Handle player bet result
+		 * @param {object} data retrived from server
+		 */
+		betResult: function(data){
+			var result = data.result;
+
+			if( result !=  Consts.BET_RESULT_CONFIRMED_LAST)
+			{
+				console.log("waiting for the rest of players to bet")
+			}
+			else
+			{
+				console.log("every one is done betting");
+				io.socket.emit("shit");
+			}
+		},
+		/**
 		 * ask player to place bet
 		 */
 		placeBet: function(){
 			var bet = window.prompt("Enter your bet");
-			io.socket.emit("playerAction", { action : "bet" , args : { bet : bet } });
+			io.socket.emit("playerAction", { target : 1, action : "bet" , args : { bet : bet } });
 		},
 		/**
 		 * Render the view

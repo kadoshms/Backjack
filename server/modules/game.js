@@ -41,7 +41,17 @@ Game.prototype.hit = function(params){
 Game.prototype.bet = function(params){
 	var result = params.player.setBet(params.data.bet);
 
-	if ( result ) winston.log('info','player '+params.player.id+' placed bet of '+params.data.bet);
+	if ( result )
+	{
+		winston.log('info','player '+params.player.id+' placed bet of '+params.data.bet);
+
+		var betResult = params.room.betConfirmed(params);
+
+		if(betResult == true)
+		{
+			result = 2;
+		}
+	}
 	else winston.log('info','server rejected '+params.player.id+' bet');
 
 	return result;

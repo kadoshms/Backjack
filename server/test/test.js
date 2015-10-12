@@ -3,11 +3,13 @@ var Deck	= require('../modules/deck');
 var Player	= require('../modules/player');
 var Room	= require('../modules/room');
 var helpers	= require('../modules/helpers');
+var Game	= require('../modules/game');
 
 describe('Backjack', function(){
 
 	var room 	= new Room('Test Room');
 	var player 	= new Player(1, 0);
+	var game 	= new Game(undefined, undefined, undefined);
 
 	describe('helpers', function(){
 		it('generate a card map', function(){
@@ -43,6 +45,13 @@ describe('Backjack', function(){
 				counter++;
 			}
 			assert.equal(counter, 208);
+		});
+		it('Place bet', function(){
+			var data = { bet : 500 };
+			assert.equal(game.bet({ player : player, room : room,  data : data }), true);
+			data.bet = 600;
+			assert.equal(game.bet({ player : player, room : room,  data : data }), false);
+			assert.equal(room.betCount, 1);
 		});
 	});
 
@@ -83,10 +92,6 @@ describe('Backjack', function(){
 			player.setCredit(500);
 			assert.equal(player.getCredit(), 500);
 		});
-		it('place bets', function(){
-			assert.equal(player.setBet(500), true);
-			assert.equal(player.setBet(600), false);
-		});
 	});
 
 	describe('Room', function(){
@@ -126,6 +131,7 @@ describe('Backjack', function(){
 			assert.equal(room.round, 0);
 			assert.equal(room.players.length, 0);
 			assert.equal(room.status, 1000);
+			assert.equal(room.betCount, 0);
 		});
 	});
 });

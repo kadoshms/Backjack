@@ -21,6 +21,7 @@ function Room(name, _game){
 	this.deck.shuffle();
 	this.status	= this.STATUS_NO_ACTIVE;
 	this.round	= 0;
+	this.betCount = 0;
 	game = _game;
 }
 
@@ -132,6 +133,7 @@ Room.prototype.startNewRound = function(){
 	this.round++;
 	winston.log('info', 'new round started in room '+this.name);
 	this.setStatus(this.STATUS_BET);
+	this.betCount = 0;
 }
 
 
@@ -144,5 +146,20 @@ Room.prototype.reset = function(){
 	this.players =	[];
 	this.deck	 =  new Deck();
 	this.deck.shuffle();
+	this.betCount = 0;
 }
+
+/**
+ * Confirm player bet
+ * @param params room and player data
+ */
+Room.prototype.betConfirmed = function(params){
+	this.betCount++;
+
+	// if all players placed their bets
+	if( this.betCount == this.players.length ) return true;
+
+	return false;
+}
+
 module.exports = Room;

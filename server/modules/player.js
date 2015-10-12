@@ -75,11 +75,11 @@ Player.prototype.setBet = function(bet){
 	if( result >= 0 )
 	{
 		this.credit = this.credit - bet;
-		return true;
+		return 1;
 	}
 	else
 	{
-		return false;
+		return 0;
 	}
 }
 
