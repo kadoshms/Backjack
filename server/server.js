@@ -36,6 +36,8 @@ io.on("connection", function(socket){
 	 */
 	socket.on("playerAction", function(data){
 		var player = room.getPlayer(socket.id);
+		var target = data.target == 1 ? 1 : 0;
+
 		var params = {
 			room	:	room,
 			player	:	player,
@@ -49,7 +51,14 @@ io.on("connection", function(socket){
 
 		var result = game[data.action].call(Room, params);
 
-		networking.toRoom(room, "playerActionResult", { action : data.action,  player : player , result : result });
+		if( target == 1 )
+		{
+			networking.toPlayer(room, player, "playerActionResult", { action : data.action,  player : player , result : result });
+		}
+		else
+		{
+			networking.toRoom(room, "playerActionResult", { action : data.action,  player : player , result : result });
+		}
 	});
 });
 
