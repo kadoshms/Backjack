@@ -12,6 +12,9 @@ define([], function(){
 	consts.BET_RESULT_CONFIRMED = 1;
 	consts.BET_RESULT_CONFIRMED_LAST = 2;
 
+	// system
+	consts.IMG_BASE = "client/image/";
+
 	return consts;
 	
 });
