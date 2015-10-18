@@ -50,15 +50,29 @@ io.on("connection", function(socket){
 		}
 
 		var result = game[data.action].call(Room, params);
+		var emitData = { action : data.action,  player : player , result : result , room : room};
 
 		if( target == 1 )
 		{
-			networking.toPlayer(room, player, "playerActionResult", { action : data.action,  player : player , result : result });
+			networking.toPlayer(room, player, "playerActionResult", emitData);
 		}
 		else
 		{
-			networking.toRoom(room, "playerActionResult", { action : data.action,  player : player , result : result });
+			networking.toRoom(room, "playerActionResult", emitData);
 		}
+	});
+
+	/**
+	 * Handle done betting event
+	 */
+	socket.on("doneBetting", function(data){
+		winston.log('info','all players in room '+data.room.name+ ' have placed their bets');
+
+		var params = {
+			room	:	room
+		};
+
+		game.deal(params);
 	});
 });
 

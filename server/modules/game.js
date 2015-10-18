@@ -6,6 +6,7 @@
 
 var winston 		= 	require('winston');
 var Room			=	require('./room');
+var TurnManager		=	require('./turn-manager');
 
 /**
  * Construct a new game manager
@@ -26,10 +27,16 @@ function Game(io, map, networking)
  * @param {object} params parameters
  */
 Game.prototype.hit = function(params){
-	var card = params.room.getDeck().draw();
-	winston.log('info', 'player '+params.player.id+' drawed card '+ card + " and value " + game.map[card].value);
+	var cardIndex = params.room.getDeck().draw();
+	var card = game.map[cardIndex];
 
-	params.player.handCards(card);
+	winston.log('info', 'player '+params.player.id+' drawed card '+ cardIndex + " and value " + game.map[cardIndex].value);
+
+	// determine if card should be flipped or not
+	card.flipped = (params.player.index == -1) && (params.player.hand.length > 0) ? true : false;
+
+	params.player.handCards(cardIndex);
+	game.networking.toRoom(params.room, "dealResult", { card : card, player : params.player });
 
 	return card;
 }
@@ -80,6 +87,7 @@ Game.prototype.ready = function(params){
  */
 Game.prototype.startGame = function(params) {
 	var room = params.room;
+	this.turnManager = new TurnManager(room);
 
 	if ( room.round == 0 )
 	{
@@ -100,6 +108,41 @@ Game.prototype.roomStatusHandlers = [];
 Game.prototype.roomStatusHandlers[Room.prototype.STATUS_BET] = function(room){
 	winston.log("info", "room "+room.name+"'s players are placing bets now");
 	game.networking.toRoom(room, "placeBet", {});
+}
+
+/**
+ * Deal cards - first round
+ * @param {object} param parameters
+ */
+Game.prototype.deal = function(params){
+	var room 	= params.room;
+	var players = room.players;
+	var dealer 	= room.dealer;
+	var card;
+
+	room.setStatus(Room.prototype.STATUS_HANDS);
+
+	for(var i = 0 ; i < 2; i++)
+	{
+		var current	= this.turnManager.getCurrent();
+
+		// while not all players got their cards
+		while( current != -1 )
+		{
+			var currentPlayer = room.getPlayerByIndex(current);
+			winston.log('info', 'dealing card to player '+currentPlayer.id);
+
+			this.turnManager.nextTurn();
+			game.hit({ room : room, player : currentPlayer });
+
+			current = this.turnManager.getCurrent();
+		}
+		winston.log('info', 'dealing card to dealer');
+		game.hit({ room : room, player : room.dealer });
+
+		this.turnManager.reset();
+	}
+
 }
 
 module.exports = Game;

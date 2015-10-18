@@ -38,6 +38,12 @@ define(['socket.io'], function(io){
 		io.socket.on("placeBet", function(data){
 			main.placeBet();
 		});
+		/**
+		 * Exectued when server deals a card to player
+		 */
+		io.socket.on("dealResult", function(data){
+			main.addCardToTable(data);
+		});
 	}
 
 	return { initialize : initialize };
