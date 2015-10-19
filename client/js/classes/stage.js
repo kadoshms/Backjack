@@ -79,9 +79,14 @@ define([
 	/**
 	 * generic method to add child to stage
 	 * @param {object} child child to add
+	 * @param optional container
 	 */
-	Stage.prototype.addChild = function(child){
-		this.crjs.addChild(child);
+	Stage.prototype.addChild = function(child, container){
+		if(!container)
+			this.crjs.addChild(child);
+		else
+			container.addChild(child);
+
 		this.crjs.update();
 	}
 
@@ -98,14 +103,15 @@ define([
 	/**
 	 * add bitmap to stage
 	 * @param {string} path bitmap path
+	 * @param optional container
 	 */
-	Stage.prototype.addBitmap = function(path){
+	Stage.prototype.addBitmap = function(path, container){
 		var self = this;
 		var image = new Image();
 		image.src = path;
 		image.onload = function(){
 			var bitmap = new createjs.Bitmap(path);
-			self.addChild(bitmap);
+			self.addChild(bitmap, container);
 		}
 	}
 
@@ -114,6 +120,15 @@ define([
 	 */
 	Stage.prototype.update = function(){
 		this.crjs.update();
+	}
+
+	/**
+	 * get container by position
+	 * @param {object} pos position
+	 * @returns
+	 */
+	Stage.prototype.getContainerByPosition = function(pos){
+		return this.containers[pos.y][pos.x] || undefined;
 	}
 	
 
