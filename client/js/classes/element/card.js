@@ -8,9 +8,8 @@ define([
         'jquery',
         'backbone',
         'mustache',
-        'classes/consts',
-        'text!../../templates/card.mustache'
-], function($, Backbone, Mustache, Consts, Template){
+        'classes/consts'
+], function($, Backbone, Mustache, Consts){
 
 	/**
 	 * create a new instance of card
@@ -25,10 +24,13 @@ define([
 	/**
 	 * draw card
 	 * @param {object} stage stage to add the card to
+	 * @param {object} player
 	 */
-	Card.prototype.draw = function(stage){
+	Card.prototype.draw = function(stage, player){
 		var fileName = this.flipped ? "b2fv" : this.name;
-		stage.addBitmap("client/image/classic-cards/"+fileName+".png");
+		var container = stage.getContainerByPosition(player.sit);
+
+		stage.addBitmap("client/image/classic-cards/"+fileName+".png", container);
 	}
 
 	return Card;
