@@ -17,6 +17,7 @@ var game			=	undefined;
 function Room(name, _game){
 	this.name	 =	name;
 	this.players =	[];
+	this.readyPlayers = [];
 	this.deck	 =  new Deck();
 	this.deck.shuffle();
 	this.status	= this.STATUS_NO_ACTIVE;
@@ -177,6 +178,20 @@ Room.prototype.betConfirmed = function(params){
 	// if all players placed their bets
 	if( this.betCount == this.players.length ) return true;
 
+	return false;
+}
+
+/**
+ * adds player to player ready array
+ * @param index player index
+ * @returns {Boolean} success or failure
+ */
+Room.prototype.playerReady = function(index){
+	if(this.readyPlayers.indexOf(index) == -1)
+	{
+		this.readyPlayers.push(index);
+		return true;
+	}
 	return false;
 }
 

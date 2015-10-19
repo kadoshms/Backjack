@@ -35,7 +35,7 @@ TurnManager.prototype.getCurrent = function(){
  * Next turn
  */
 TurnManager.prototype.nextTurn = function(){
-	if( this.current >= this.room.players.length - 1 )
+	if( this.current >= this.room.readyPlayers.length - 1 )
 	{
 		this.current = -1;
 	}

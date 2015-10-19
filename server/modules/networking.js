@@ -41,4 +41,21 @@ Networking.prototype.toPlayer = function(room, player, evt, message){
 	}
 }
 
+/**
+ * Send message only to ready players
+ * @param room room the room the player is in
+ * @param evt event name
+ * @param msg message to emit
+ */
+Networking.prototype.toReadyPlayers = function(room, evt, message){
+	for(var i = 0 ; i < room.players.length; i++)
+	{
+		if( room.readyPlayers.indexOf(room.players[i].index) != -1 )
+		{
+			this.io.to(room.players[i].id).emit(evt,message);
+			return;
+		}
+	}
+}
+
 module.exports = Networking;

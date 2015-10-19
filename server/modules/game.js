@@ -70,6 +70,7 @@ Game.prototype.bet = function(params){
  */
 Game.prototype.ready = function(params){
 	var room = params.room;
+	room.playerReady(params.player.index);
 	params.player.playerReady(params.data.sit);
 
 	var readyPlayers = room.getNumOfReadyPlayers();
@@ -107,7 +108,7 @@ Game.prototype.roomStatusHandlers = [];
 
 Game.prototype.roomStatusHandlers[Room.prototype.STATUS_BET] = function(room){
 	winston.log("info", "room "+room.name+"'s players are placing bets now");
-	game.networking.toRoom(room, "placeBet", {});
+	game.networking.toReadyPlayers(room, "placeBet", {});
 }
 
 /**

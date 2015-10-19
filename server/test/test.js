@@ -84,6 +84,7 @@ describe('Backjack', function(){
 	describe('Player', function(){
 		it('player ready', function(){
 			assert.equal(player.playerReady({x:1, y:1}), true);
+			room.playerReady(player.index);
 
 			// After player is ready already...
 			assert.equal(player.playerReady({x:1, y:1}), false);
@@ -139,6 +140,10 @@ describe('Backjack', function(){
 			assert.equal(room.players.length, 0);
 			assert.equal(room.status, 1000);
 			assert.equal(room.betCount, 0);
+		});
+		it('players ready array', function(){
+//			assert.equal(room.readyPlayers.indexOf(0), 0);
+			console.log(room.readyPlayers)
 		});
 	});
 });
