@@ -44,6 +44,12 @@ define(['socket.io'], function(io){
 		io.socket.on("dealResult", function(data){
 			main.addCardToTable(data);
 		});
+		/**
+		 * Remove player's sit if other players are connected but not ready
+		 */
+		io.socket.on("removeSit", function(data){
+			main.removeSit(data);
+		});
 	}
 
 	return { initialize : initialize };
