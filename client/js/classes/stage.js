@@ -104,13 +104,20 @@ define([
 	 * add bitmap to stage
 	 * @param {string} path bitmap path
 	 * @param optional container
+	 * @param optional {function} position manipulation
 	 */
-	Stage.prototype.addBitmap = function(path, container){
+	Stage.prototype.addBitmap = function(path, container, posCallback){
 		var self = this;
 		var image = new Image();
 		image.src = path;
 		image.onload = function(){
 			var bitmap = new createjs.Bitmap(path);
+			if(typeof(posCallback) == "function")
+			{
+				var pos = posCallback();
+				bitmap.x = pos.x;
+				bitmap.y = pos.y;
+			}
 			self.addChild(bitmap, container);
 		}
 	}
