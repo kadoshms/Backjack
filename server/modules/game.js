@@ -70,7 +70,7 @@ Game.prototype.bet = function(params){
  */
 Game.prototype.ready = function(params){
 	var room = params.room;
-	params.player.playerReady();
+	params.player.playerReady(params.data.sit);
 
 	var readyPlayers = room.getNumOfReadyPlayers();
 

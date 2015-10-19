@@ -21,8 +21,17 @@ function Player(id, index){
 	this.credit = 1000;
 	this.bet	= 0;
 	this.status = this.STATUS_NOT_READY;
+	this.sit = {};
 }
 
+/**
+ * set player sit
+ * @param {object} sit player sit
+ */
+Player.prototype.setSit = function(sit){
+	this.sit = sit;
+	winston.log('info','player '+this.id+' is now sitting at '+this.sit.x+","+this.sit.y);
+}
 /**
  * set credit
  * @param credit
@@ -85,13 +94,16 @@ Player.prototype.setBet = function(bet){
 
 /**
  * Player ready
+ * @param sit sit chosen
  */
-Player.prototype.playerReady = function(){
+Player.prototype.playerReady = function(sit){
 
 	if ( this.status == this.STATUS_READY)
 		return false;
 
 	this.status = this.STATUS_READY;
+	this.setSit(sit);
+
 	winston.log('info', 'player ' +this.id+ " marked as ready");
 
 	return true;
