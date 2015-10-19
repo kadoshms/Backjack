@@ -24,7 +24,7 @@ function Room(name, _game){
 	this.round	= 0;
 	this.betCount = 0;
 	this.dealer = new Player("dealer", -1);
-
+	this.takenSeats = [];
 	game = _game;
 }
 
@@ -186,10 +186,11 @@ Room.prototype.betConfirmed = function(params){
  * @param index player index
  * @returns {Boolean} success or failure
  */
-Room.prototype.playerReady = function(index){
+Room.prototype.playerReady = function(index, seat){
 	if(this.readyPlayers.indexOf(index) == -1)
 	{
 		this.readyPlayers.push(index);
+		this.takenSeats.push(seat);
 		return true;
 	}
 	return false;

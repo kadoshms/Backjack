@@ -70,11 +70,16 @@ Game.prototype.bet = function(params){
  */
 Game.prototype.ready = function(params){
 	var room = params.room;
-	room.playerReady(params.player.index);
+	room.playerReady(params.player.index, params.data.sit);
 	params.player.playerReady(params.data.sit);
 
 	var readyPlayers = room.getNumOfReadyPlayers();
 
+	// remove player's sit
+	if ( room.players.length > room.readyPlayers.length)
+	{
+		game.networking.toNonReadyPlayers(room, "removeSit", { sit : params.data.sit });
+	}
 	// check if there's at least one player ready
 	if ( room.status == Room.prototype.STATUS_NO_ACTIVE && readyPlayers >= 1)
 	{

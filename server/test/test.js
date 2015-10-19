@@ -83,11 +83,12 @@ describe('Backjack', function(){
 
 	describe('Player', function(){
 		it('player ready', function(){
-			assert.equal(player.playerReady({x:1, y:1}), true);
-			room.playerReady(player.index);
+			var sit = {x:1, y:1};
+			assert.equal(player.playerReady(sit), true);
+			room.playerReady(player.index, sit);
 
 			// After player is ready already...
-			assert.equal(player.playerReady({x:1, y:1}), false);
+			assert.equal(player.playerReady(sit), false);
 		});
 		it('set player credit', function(){
 			player.setCredit(500);

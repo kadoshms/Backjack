@@ -76,6 +76,20 @@ io.on("connection", function(socket){
 	});
 });
 
+//Add headers
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
+
+// get available seats
+app.get('/seats', function(req, res){
+	res.send(room.takenSeats);
+});
+
 http.listen(3000, function(){
 	console.log('Backjack server started on port *:3000');
 });
