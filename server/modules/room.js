@@ -24,6 +24,7 @@ function Room(name, _game){
 	this.round	= 0;
 	this.betCount = 0;
 	this.dealer = new Player("dealer", -1);
+	this.dealer.setSit({x : 1 , y : 0});
 	this.takenSeats = [];
 	game = _game;
 }
