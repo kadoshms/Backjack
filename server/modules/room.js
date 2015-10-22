@@ -113,6 +113,8 @@ Room.prototype.getPlayer = function(id){
  * @return {Player} player with specified index
  */
 Room.prototype.getPlayerByIndex = function(index){
+	if(index == -1) return this.dealer;
+
 	for(var i = 0 ; i < this.players.length; i++)
 	{
 		if(this.players[i].index == index)
