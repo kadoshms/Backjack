@@ -16,6 +16,9 @@ define([
 		this.crjs = new createjs.Stage(canvas);
 		this.containers = [];
 		this.buildContainers();
+
+		createjs.Ticker.setFPS(60);
+		createjs.Ticker.addEventListener("tick", this.crjs);
 	}
 	/**
 	 * divides stage into evan containers
@@ -80,14 +83,19 @@ define([
 	 * generic method to add child to stage
 	 * @param {object} child child to add
 	 * @param optional container
+	 * @param optional {function} tween function
+	 * @param optional {object} set of options to apply to child
 	 */
-	Stage.prototype.addChild = function(child, container){
+	Stage.prototype.addChild = function(child, container, tween, options){
+		if(typeof(options) == "object") $.extend(child, options, true);
 		if(!container)
 			this.crjs.addChild(child);
 		else
 			container.addChild(child);
 
 		this.crjs.update();
+
+		if(typeof(tween) == "function") tween(child);
 	}
 
 	/**
@@ -105,8 +113,10 @@ define([
 	 * @param {string} path bitmap path
 	 * @param optional container
 	 * @param optional {function} position manipulation
+	 * @param optional {function} tween tween function
+	 * @param optional {object} set of options to apply to child
 	 */
-	Stage.prototype.addBitmap = function(path, container, posCallback){
+	Stage.prototype.addBitmap = function(path, container, posCallback, tween, options){
 		var self = this;
 		var image = new Image();
 		image.src = path;
@@ -118,7 +128,7 @@ define([
 				bitmap.x = pos.x;
 				bitmap.y = pos.y;
 			}
-			self.addChild(bitmap, container);
+			self.addChild(bitmap, container, tween, options);
 		}
 	}
 
