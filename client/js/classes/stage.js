@@ -85,13 +85,24 @@ define([
 	 * @param optional container
 	 * @param optional {function} tween function
 	 * @param optional {object} set of options to apply to child
+	 * @param optional {number} add child at index
 	 */
-	Stage.prototype.addChild = function(child, container, tween, options){
+	Stage.prototype.addChild = function(child, container, tween, options, index){
 		if(typeof(options) == "object") $.extend(child, options, true);
-		if(!container)
-			this.crjs.addChild(child);
-		else
+
+		if(container == undefined)
+		{
+			container = this.crjs;
+		}
+
+		if( index == undefined )
+		{
 			container.addChild(child);
+		}
+		else
+		{
+			container.addChildAt(child, index);
+		}
 
 		this.crjs.update();
 
@@ -115,8 +126,9 @@ define([
 	 * @param optional {function} position manipulation
 	 * @param optional {function} tween tween function
 	 * @param optional {object} set of options to apply to child
+	 * @param optional {number} index index of bitmap for draw order
 	 */
-	Stage.prototype.addBitmap = function(path, container, posCallback, tween, options){
+	Stage.prototype.addBitmap = function(path, container, posCallback, tween, options, index){
 		var self = this;
 		var image = new Image();
 		image.src = path;
@@ -128,7 +140,7 @@ define([
 				bitmap.x = pos.x;
 				bitmap.y = pos.y;
 			}
-			self.addChild(bitmap, container, tween, options);
+			self.addChild(bitmap, container, tween, options, index);
 		}
 	}
 
