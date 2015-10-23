@@ -75,4 +75,22 @@ Networking.prototype.toNonReadyPlayers = function(room, evt, message){
 	}
 }
 
+/**
+ * Send message only to non-ready players
+ * @param room room the room the player is in
+ * @param player player to skip
+ * @param evt event name
+ * @param msg message to emit
+ */
+Networking.prototype.toAllPlayersExcept = function(room, player, evt, message){
+	for(var i = 0 ; i < room.players.length; i++)
+	{
+		if( room.players[i].id != player.id )
+		{
+			this.io.to(room.players[i].id).emit(evt,message);
+			return;
+		}
+	}
+}
+
 module.exports = Networking;
