@@ -131,9 +131,9 @@ describe('Backjack', function(){
 			assert.equal(room.status, 1010);
 		});
 		it('hand card', function(){
-			player.handCards([1, 4]);
-			assert.notEqual(player.getHand().indexOf(4), -1);
-			assert.equal(player.getHand().length, 2);
+			player.handCards([{ key : 1 , value : 1}, { key : 5 , value : 5}]);
+			assert.equal(player.getHand()[0].key, 1);
+			assert.equal(player.getHand()[1].value, 5);
 		});
 		it('reset room', function(){
 			room.reset();
@@ -143,8 +143,6 @@ describe('Backjack', function(){
 			assert.equal(room.betCount, 0);
 		});
 		it('players ready array', function(){
-//			assert.equal(room.readyPlayers.indexOf(0), 0);
-			console.log(room.readyPlayers)
 		});
 	});
 });

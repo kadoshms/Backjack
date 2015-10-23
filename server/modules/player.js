@@ -53,7 +53,7 @@ Player.prototype.getCredit = function(){
  * @param {Array} cards array of cards
  */
 Player.prototype.handCards = function(cards){
-	if(typeof(cards) != "number")
+	if(cards.constructor === Array)
 	{
 		for(var i = 0 ; i < cards.length; i++)
 		{

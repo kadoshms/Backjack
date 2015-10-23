@@ -35,7 +35,7 @@ Game.prototype.hit = function(params){
 	// determine if card should be flipped or not
 	card.flipped = (params.player.index == -1) && (params.player.hand.length > 0) ? true : false;
 
-	params.player.handCards(cardIndex);
+	params.player.handCards(card);
 	game.networking.toRoom(params.room, "dealResult", { card : card, player : params.player });
 
 	return card;
