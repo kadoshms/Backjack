@@ -16,11 +16,16 @@ define(['socket.io'], function(io){
 		 * @param data
 		 */
 		io.socket.on("playerJoined", function(data){
-
+			// do nothing for now
+		});
+		/**
+		 * Executed when player joins room successfully
+		 * @param data
+		 */
+		io.socket.on("playerJoinSuccess", function(data){
 			// initialize room for player
 			main.initRoom(data);
 		});
-
 		/**
 		 * Executed when server is done handling user action
 		 * @param data
