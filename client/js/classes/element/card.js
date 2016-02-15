@@ -14,12 +14,14 @@ define([
 	/**
 	 * create a new instance of card
 	 * @param {object} card card data
+	 * @param {function} callback function to be exectued after card is dealt
 	 */
-	function Card(data){
+	function Card(data, callback){
 		this.name = data.name;
 		this.value = data.value;
 		this.flipped = data.flipped;
 		this.indexInHand = data.indexInHand;
+		this.dealCompleteHandler = callback || function(){};
 	}
 	
 	/**
@@ -47,7 +49,8 @@ define([
 			card.y = -500;
 			card.alpha = 0;
 			createjs.Tween.get(card, {loop: false}, null, false)
-				.to({y : 0, alpha : 1}, 1000);
+				.to({y : 0, alpha : 1}, 1000)
+				.call(_card.dealCompleteHandler);
 		}
 
 		var options = { alpha : (animate === false) ? 1 : 0 };
