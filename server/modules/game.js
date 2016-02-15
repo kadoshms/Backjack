@@ -120,8 +120,9 @@ Game.prototype.roomStatusHandlers[Room.prototype.STATUS_BET] = function(room){
 /**
  * Deal cards - first round
  * @param {object} param parameters
+ * @param {function} callback callback function to be exectued after dealing
  */
-Game.prototype.deal = function(params){
+Game.prototype.deal = function(params, callback){
 	var room 	= params.room;
 	var players = room.players;
 	var dealer 	= room.dealer;
@@ -129,27 +130,43 @@ Game.prototype.deal = function(params){
 
 	room.setStatus(Room.prototype.STATUS_HANDS);
 
-	for(var i = 0 ; i < 2; i++)
-	{
-		var current	= this.turnManager.getCurrent();
+	var maxCards = room.players.length * 2 + 2,
+		count 	= 0,
+		current	= game.turnManager.getCurrent();
 
-		// while not all players got their cards
-		while( current != -1 )
+	// card dealing
+	var dealCard = function(){
+		var currentPlayer = room.getPlayerByIndex(current);
+
+		if(count >= maxCards)
 		{
-			var currentPlayer = room.getPlayerByIndex(current);
-			winston.log('info', 'dealing card to player '+currentPlayer.id);
+			clearInterval(interval);
 
-			this.turnManager.nextTurn();
-			game.hit({ room : room, player : currentPlayer });
+			if(typeof(callback) == "function")
+			{
+				callback(params);
+			}
 
-			current = this.turnManager.getCurrent();
+			return;
 		}
-		winston.log('info', 'dealing card to dealer');
-		game.hit({ room : room, player : room.dealer });
 
-		this.turnManager.reset();
+		winston.log('info', 'dealing card to player '+currentPlayer.id);
+
+		game.turnManager.nextTurn();
+		game.hit({ room : room, player : currentPlayer });
+		count++;
+
+		current = game.turnManager.getCurrent();
 	}
+	var interval = setInterval(dealCard, 100);
+}
 
+Game.prototype.playersTurn = function(params){
+	var room = params.room,
+		current	= game.turnManager.getCurrent(),
+		currentPlayer = room.getPlayerByIndex(current);
+
+	game.networking.toPlayer(room, currentPlayer, "yourTurn");
 }
 
 module.exports = Game;
