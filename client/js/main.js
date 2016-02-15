@@ -20,6 +20,13 @@ requirejs.config({
 	     'socket.io': {
 	         exports: 'io'
 	     },
+		 'easel': {
+			exports: 'createjs'
+		 },
+		 'tween': {
+			 deps : ['easel'],
+			 exports : 'Tween'
+		 }
 	}
 });
 
